@@ -24,8 +24,8 @@ class QuestionView(MethodView):
                     'description': question.description
                 }
         else:
-            product = Question.query.filter_by(id=id).first()
-            if not product:
+            question = Question.query.filter_by(id=id).first()
+            if not question:
                 abort(404)
 
             res = {
