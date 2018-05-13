@@ -1,6 +1,6 @@
 import flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_restless import APIManager
+
 
 # Create the Flask application and the Flask-SQLAlchemy object.
 app = flask.Flask(__name__)
@@ -17,14 +17,6 @@ db = SQLAlchemy(app)
 #      supplies such a method, so you don't need to declare a new one).
 
 
-class Question(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    description = db.Column(db.Unicode)
-
-    def __repr__(self):
-        return '<Question: %s>' % self.description
-
-
 class Person(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.Unicode, unique=True)
@@ -39,19 +31,3 @@ class Computer(db.Model):
     owner_id = db.Column(db.Integer, db.ForeignKey('person.id'))
     owner = db.relationship('Person', backref=db.backref('computers',
                                                          lazy='dynamic'))
-
-
-# Create the database tables.
-db.create_all()
-
-# Create the Flask-Restless API manager.
-manager = APIManager(app, flask_sqlalchemy_db=db)
-
-# Create API endpoints, which will be available at /api/<tablename> by
-# default. Allowed HTTP methods can be specified as well.
-manager.create_api(Person, methods=['GET', 'POST', 'DELETE'])
-manager.create_api(Computer, methods=['GET'])
-manager.create_api(Question, methods=['GET', 'POST'])
-
-# start the flask loop
-app.run()
