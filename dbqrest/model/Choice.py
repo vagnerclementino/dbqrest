@@ -11,9 +11,12 @@ from dbqrest.app import db
 #   2. They must have an __init__ method which accepts keyword arguments for
 #      all columns (the constructor in flask.ext.sqlalchemy.SQLAlchemy.Model
 #      supplies such a method, so you don't need to declare a new one).
-class Question(db.Model):
+class Choice(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.Unicode)
-
-    def __repr__(self):
-        return '<Question: %s>' % self.description
+    answer = db.Column(db.String(1))
+    question_id = db.Column(db.Integer, db.ForeignKey('question.id'))
+    question = db.relationship('Question',
+                               backref=db.backref('choices', lazy='dynamic'
+                                                  )
+                               )

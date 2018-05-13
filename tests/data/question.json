@@ -1,0 +1,7 @@
+{"description": "Quem nasceu primeiro, o ovo ou a galinha?",
+  "choices" : [{"description": "O ovo"},
+               {"description": "A galinha"},
+               {"description": "O Sarney"},
+               {"description": "Todas as opções anteriores"}
+              ]
+}
