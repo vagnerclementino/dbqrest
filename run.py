@@ -13,6 +13,12 @@ if __name__ == "__main__":
 
     # Create API endpoints, which will be available at /api/<tablename> by
     # default. Allowed HTTP methods can be specified as well.
-    manager.create_api(Question, methods=['GET', 'POST'])
-    manager.create_api(Choice, methods=['GET', 'POST'])
+    manager.create_api(Question,
+                       methods=['GET', 'POST'],
+                       url_prefix='/api/v1')
+
+    manager.create_api(Choice,
+                       methods=['GET', 'POST'],
+                       url_prefix='/api/v1')
+
     app.run()
