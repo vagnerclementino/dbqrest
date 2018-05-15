@@ -1,7 +1,7 @@
 from dbqrest.app import app, db
 from flask_restless import APIManager
-from dbqrest.model.Question import Question
 from dbqrest.model.Choice import Choice
+from dbqrest.model.Question import Question
 
 # start the flask loop
 if __name__ == "__main__":

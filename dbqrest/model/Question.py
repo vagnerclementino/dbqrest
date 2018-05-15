@@ -12,9 +12,9 @@ from dbqrest.app import db
 #      all columns (the constructor in flask.ext.sqlalchemy.SQLAlchemy.Model
 #      supplies such a method, so you don't need to declare a new one).
 class Question(db.Model):
-
-
     __tablename__ = 'questions'
+    __table_args__ = {"schema": "dbqrest"}
+
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.Unicode)
 

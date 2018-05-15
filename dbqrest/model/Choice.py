@@ -12,13 +12,13 @@ from dbqrest.app import db
 #      all columns (the constructor in flask.ext.sqlalchemy.SQLAlchemy.Model
 #      supplies such a method, so you don't need to declare a new one).
 class Choice(db.Model):
-
-
     __tablename__ = 'choices'
+    __table_args__ = {"schema": "dbqrest"}
+
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.Unicode)
     answer = db.Column(db.String(1))
-    question_id = db.Column(db.Integer, db.ForeignKey('questions.id'))
+    question_id = db.Column(db.Integer, db.ForeignKey('dbqrest.questions.id'))
     question = db.relationship('Question',
                                backref=db.backref('choices', lazy='dynamic'
                                                   )

@@ -24,8 +24,8 @@ class DevelopmentConfig(Config):
     DEVELOPMENT = True
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = ('postgresql:'
-                               '//andrezaevagner:06012018@localhost:5432/'
-                               'andrezaevagner'
+                               '//dbqrest:06012018@localhost:5432/'
+                               'dbqrest'
                                )
 
 
