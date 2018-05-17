@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from dbqrest.app import db
+from dbqrest import db
 
 
 # Create your Flask-SQLALchemy models as usual but with the following two

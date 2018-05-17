@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from dbqrest.app import db
+from dbqrest import db
 
 
 # Create your Flask-SQLALchemy models as usual but with the following two
@@ -16,6 +16,7 @@ class Question(db.Model):
     __table_args__ = {"schema": "dbqrest"}
 
     id = db.Column(db.Integer, primary_key=True)
+    code = db.Column(db.Unicode, unique=True)
     description = db.Column(db.Unicode)
 
     def __repr__(self):

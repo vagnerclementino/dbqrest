@@ -23,6 +23,7 @@ class StagingConfig(Config):
 class DevelopmentConfig(Config):
     DEVELOPMENT = True
     DEBUG = True
+    SQLALCHEMY_TRACK_MODIFICATIONS = True
     SQLALCHEMY_DATABASE_URI = ('postgresql:'
                                '//dbqrest:06012018@localhost:5432/'
                                'dbqrest'
