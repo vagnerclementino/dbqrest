@@ -15,10 +15,21 @@ class Question(db.Model):
     __tablename__ = 'questions'
     __table_args__ = {"schema": "dbqrest"}
 
-    id = db.Column(db.Integer, primary_key=True)
-    code = db.Column(db.Unicode, unique=True)
-    description = db.Column(db.Unicode)
-    creation_time = db.Column(db.DateTime)
+    id = db.Column(db.Integer,
+                   primary_key=True)
+
+    code = db.Column(db.Unicode,
+                     nullable=False,
+                     unique=True
+                     )
+
+    description = db.Column(db.Unicode,
+                            nullable=False
+                            )
+
+    creation_time = db.Column(db.DateTime,
+                              nullable=False
+                              )
 
     def __repr__(self):
         return '<Question: %s>' % self.description
