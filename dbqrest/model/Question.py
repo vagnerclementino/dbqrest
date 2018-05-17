@@ -18,6 +18,7 @@ class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     code = db.Column(db.Unicode, unique=True)
     description = db.Column(db.Unicode)
+    creation_time = db.Column(db.DateTime)
 
     def __repr__(self):
         return '<Question: %s>' % self.description
