@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from dbqrest import db
-
+from sqlalchemy.orm import validates
 
 # Create your Flask-SQLALchemy models as usual but with the following two
 # (reasonable) restrictions:
@@ -18,8 +18,15 @@ class Choice(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.Unicode)
     answer = db.Column(db.String(1))
-    question_id = db.Column(db.Integer, db.ForeignKey('dbqrest.questions.id'))
+    question_id = db.Column(db.Integer,
+                            db.ForeignKey('dbqrest.questions.id')
+                            )
     question = db.relationship('Question',
                                backref=db.backref('choices', lazy='dynamic'
                                                   )
                                )
+
+    @validates('answer')
+    def validate_email(self, key, answer):
+        assert answer in ('S', 'N')
+        return answer

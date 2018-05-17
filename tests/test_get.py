@@ -14,6 +14,7 @@ def test_get():
                    }
 
     question = {"description": "Quem nasceu primeiro, o ovo ou a galinha?",
+                  "code":  "Q0",
                   "choices" : [{"description": "O ovo",
                                 "answer": "N"
                                 },
@@ -32,12 +33,15 @@ def test_get():
                               ]
     }
 
-    url = 'http://127.0.0.1:5000/api/v1/%s' % collections[0]
-    response = requests.post(url,
-                             data=json.dumps(question),
-                             headers=post_headers
-                             )
-    assert response.status_code == 201
+    url = f"http://127.0.0.1:5000/api/v1/{collections[0]}/{question['code']}"
+    response = requests.get(url, headers=headers)
+    if response.status_code != 200:
+        url = 'http://127.0.0.1:5000/api/v1/%s' % collections[0]
+        response = requests.post(url,
+                                 data=json.dumps(question),
+                                 headers=post_headers
+                                 )
+        assert response.status_code == 201
 
     for resource in collections:
         url = 'http://127.0.0.1:5000/api/v1/%s' % resource
@@ -46,7 +50,10 @@ def test_get():
         assert response.status_code == 200
 
     for resource in collections:
-        url = 'http://127.0.0.1:5000/api/v1/%s/1' % resource
+        if resource == 'questions':
+            url = f"http://127.0.0.1:5000/api/v1/{resource}/{question['code']}"
+        else:
+            url = f'http://127.0.0.1:5000/api/v1/{resource}/1'
         # Make a GET request for the entire collection.
         response = requests.get(url, headers=headers)
         assert response.status_code == 200

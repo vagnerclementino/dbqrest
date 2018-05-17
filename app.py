@@ -16,7 +16,8 @@ if __name__ == "__main__":
     # default. Allowed HTTP methods can be specified as well.
     manager.create_api(Question,
                        methods=['GET', 'POST'],
-                       url_prefix= constants.URL_PREFIX
+                       url_prefix= constants.URL_PREFIX,
+                       primary_key='code'
                        )
 
     manager.create_api(Choice,

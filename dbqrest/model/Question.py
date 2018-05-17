@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from dbqrest import db
-
+from datetime import datetime
 
 # Create your Flask-SQLALchemy models as usual but with the following two
 # (reasonable) restrictions:
@@ -16,19 +16,22 @@ class Question(db.Model):
     __table_args__ = {"schema": "dbqrest"}
 
     id = db.Column(db.Integer,
-                   primary_key=True)
+                   primary_key=True,
+                   autoincrement=True
+                   )
 
-    code = db.Column(db.Unicode,
+    code = db.Column(db.Unicode(5),
                      nullable=False,
                      unique=True
                      )
 
-    description = db.Column(db.Unicode,
+    description = db.Column(db.Unicode(5000),
                             nullable=False
                             )
 
     creation_time = db.Column(db.DateTime,
-                              nullable=False
+                              nullable=False,
+                              default=datetime.now()
                               )
 
     def __repr__(self):
